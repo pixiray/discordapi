@@ -1,7 +1,7 @@
-# Discord Api
-This is an implementation of the Discord API. For the Discord Music Bot Service from PixiRay.
+pixiray.discord.api ![](https://pixiray.visualstudio.com/_apis/public/build/definitions/d1b26592-3661-4358-9311-b5c6f8525eb2/3/badge)
 
-![](https://pixiray.visualstudio.com/_apis/public/build/definitions/d1b26592-3661-4358-9311-b5c6f8525eb2/3/badge)
+# Discord Api 
+This is an implementation of the Discord API. For the Discord Music Bot Service from PixiRay.
 
 #Discord Official API Documentation
 - [Discord Developer API](https://discordapp.com/developers/)
