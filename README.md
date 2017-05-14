@@ -1,2 +1,20 @@
-# discordapi
-this is a implementation of the discord api
+# Discord Api
+This is an implementation of the Discord API. For the Discord Music Bot Service from PixiRay.
+
+#Discord Official API Documentation
+- [Discord Developer API](https://discordapp.com/developers/)
+
+There are some Channels on Discord you may join to start the conversation:
+
+- [Discord API Server](https://discordapp.com/invite/0SBTUU1wZTWPnGdJ)
+Note: "You need to have discord installed to get started."
+
+There are several implementations of the Discord API´s you can check them out here:
+[Discord Libraries](https://discordapp.com/developers/docs/topics/libraries)
+
+#About this API
+This API focuses on beeing stable and having a great Performance. It is completly written in .net core.
+The Overall Design is pretty Simple.
+
+Main Component is the DiscordClient which allows you to interact with Discord.
+
