@@ -3,6 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <RootNamespace>Pixiray.Discord.Api</RootNamespace>
+    <Authors>PixiRay Ltd.</Authors>
+    <Company>PixiRay Ltd.</Company>
+    <Product>Pixiray.Discord.Api</Product>
+    <Description>Unofficial Api for Discord written in .net Core</Description>
+    <Copyright>PixiRay Ltd.</Copyright>
+    <PackageProjectUrl>pixiray.io</PackageProjectUrl>
+    <AssemblyName>Discord</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

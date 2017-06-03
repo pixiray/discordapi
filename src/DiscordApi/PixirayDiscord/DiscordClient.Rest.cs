@@ -16,6 +16,5 @@ namespace Pixiray.Discord.Api
         /// </summary>
         public string Token { get; set; }
 
-
     }
 }

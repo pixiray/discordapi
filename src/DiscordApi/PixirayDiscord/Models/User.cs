@@ -14,7 +14,7 @@ namespace Pixiray.Discord.Api.Models
     {
         /// <summary>
         /// the user's id
-        /// Field: id
+        /// EmbedField: id
         /// Type: snowflake
         /// </summary>
         [JsonProperty("id")]
