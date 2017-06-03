@@ -7,6 +7,22 @@ using Newtonsoft.Json;
 
 namespace Pixiray.Discord.Api.Models
 {
+    //NOTE:
+    /*
+     * Message Formatting
+        Discord utilizes a subset of markdown for rendering message content on its clients, while also adding some custom functionality to enable things like mentioning users and channels. This functionality uses the following formats:
+        Formats
+        Type	Structure	Example
+        User	<@USER_SNOWFLAKE_ID>	<@80351110224678912>
+        User (Nickname)	<@!USER_SNOWFLAKE_ID>	<@!80351110224678912>
+        Channel	<#CHANNEL_SNOWFLAKE_ID>	<#103735883630395392>
+        Role	<@&ROLE_SNOWFLAKE_ID>	<@&165511591545143296>
+        Custom Emoji	<:NAME:ID>	<:mmLol:216154654256398347>
+        Using the markdown for either users, roles or channels will mention the target(s) accordingly.
+     * https://discordapp.com/developers/docs/resources/channel#message-formatting
+     */
+
+
     /// <summary>
     /// Messages Object as specified
     /// Represents a message sent in a channel within Discord.
@@ -210,30 +226,5 @@ namespace Pixiray.Discord.Api.Models
         public string Name { get; set; }
         [JsonProperty("url")]
         public string Url { get; set; }
-    }
-
-    /// <summary>
-    /// Footer Struct
-    /// https://discordapp.com/developers/docs/resources/channel#embed-footer-structure
-    /// </summary>
-    public class Footer
-    {
-        /// <summary>
-        /// footer text
-        /// </summary>
-        [JsonProperty("text")]
-        public string Text { get; set; }
-
-        /// <summary>
-        /// url of footer icon (only supports http(s) and attachments)
-        /// </summary>
-        [JsonProperty("icon_url")]
-        public string IconUrl { get; set; }
-
-        /// <summary>
-        /// a proxied url of footer icon
-        /// </summary>
-        [JsonProperty("proxy_icon_url")]
-        public string IconProxyUrl { get; set; }
     }
 }
