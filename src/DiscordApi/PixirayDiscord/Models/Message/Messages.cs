@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -9,7 +10,7 @@ namespace Pixiray.Discord.Api.Models
     /// Messages Object as specified
     /// Represents a message sent in a channel within Discord.
     /// </summary>
-    public class Messages
+    public class Message
     {
         /// <summary>
         /// id of the message
@@ -96,7 +97,7 @@ namespace Pixiray.Discord.Api.Models
         /// array of embed objects
         /// </summary>
         [JsonProperty("embeds")]
-        public List<Embeds> Embedses { get; set; }
+        public List<Embed> Embeds { get; set; }
 
         /// <summary>
         /// reactions to the message
@@ -126,14 +127,64 @@ namespace Pixiray.Discord.Api.Models
     }
 
 
-
-    //TODO: Implement
-    public class Reaction
+    /// <summary>
+    /// Embeds Object
+    /// https://discordapp.com/developers/docs/resources/channel#embed-object
+    /// </summary>
+    public class Embed
     {
+        /// <summary>
+        /// title of embed
+        /// </summary>
+        [JsonProperty("title")]
+        public string Title { get; set; }
+        
+        /// <summary>
+        /// type of embed (always "rich" for webhook embeds)
+        /// </summary>
+        [JsonProperty("type")]
+        public string Type { get; set; }
+
+        /// <summary>
+        /// description of embed
+        /// </summary>
+        [JsonProperty("description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// url of embed
+        /// </summary>
+        [JsonProperty("url")]
+        [DataType(DataType.Url)]
+        public string Url { get; set; }
+
+        /// <summary>
+        /// timestamp of embed content
+        /// </summary>
+        [JsonProperty("timestamp")]
+        public DateTime Timestamp { get; set; }
+
+        /// <summary>
+        /// color code of the embed
+        /// </summary>
+        [JsonProperty("color")]
+        public int Color { get; set; }
+
+        public Footer Footer { get; set; }
+
+        [JsonProperty("")]
+        public Thumbnail Thumbnail { get; set; }
+        [JsonProperty("")]
+        public Video Video { get; set; }
+        [JsonProperty("")]
+        public Provider Provider { get; set; }
+        [JsonProperty("")]
+        public Author Author { get; set; }
+        [JsonProperty("")]
+        public List<EmbedField> Fields { get; set; }
     }
 
-    //TODO: Implement
-    public class Embeds
+    public class Footer
     {
     }
 
