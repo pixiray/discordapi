@@ -9,6 +9,7 @@
     <Description>Unofficial Api for Discord written in .net Core</Description>
     <Copyright>PixiRay Ltd.</Copyright>
     <PackageProjectUrl>pixiray.io</PackageProjectUrl>
+    <AssemblyName>Discord</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

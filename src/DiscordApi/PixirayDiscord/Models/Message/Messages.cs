@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection.Metadata;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -211,56 +212,28 @@ namespace Pixiray.Discord.Api.Models
         public string Url { get; set; }
     }
 
+    /// <summary>
+    /// Footer Struct
+    /// https://discordapp.com/developers/docs/resources/channel#embed-footer-structure
+    /// </summary>
     public class Footer
     {
-    }
-
-    /// <summary>
-    /// The Attachment Object
-    /// https://discordapp.com/developers/docs/resources/channel#attachment-object
-    /// </summary>
-    public class Attachment
-    {
         /// <summary>
-        /// attachment id
+        /// footer text
         /// </summary>
-        [JsonProperty("id")]
-        public int Id { get; set; }
+        [JsonProperty("text")]
+        public string Text { get; set; }
 
         /// <summary>
-        /// name of file attached
+        /// url of footer icon (only supports http(s) and attachments)
         /// </summary>
-        [JsonProperty("filename")]
-        public string FileName { get; set; }
+        [JsonProperty("icon_url")]
+        public string IconUrl { get; set; }
 
         /// <summary>
-        /// size of file in bytes
+        /// a proxied url of footer icon
         /// </summary>
-        [JsonProperty("size")]
-        public int Size { get; set; }
-
-        /// <summary>
-        /// source url of file
-        /// </summary>
-        [JsonProperty("url")]
-        public string Url { get; set; }
-
-        /// <summary>
-        /// a proxied url of file
-        /// </summary>
-        [JsonProperty("proxy_url")]
-        public string ProxyUrl { get; set; }
-
-        /// <summary>
-        /// height of file (if image)
-        /// </summary>
-        [JsonProperty("height")]
-        public int? Height { get; set; }
-
-        /// <summary>
-        /// width of file (if image)
-        /// </summary>
-        [JsonProperty("width")]
-        public int? Width { get; set; }
+        [JsonProperty("proxy_icon_url")]
+        public string IconProxyUrl { get; set; }
     }
 }
