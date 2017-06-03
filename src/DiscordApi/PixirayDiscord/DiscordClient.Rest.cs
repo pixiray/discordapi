@@ -16,15 +16,5 @@ namespace Pixiray.Discord.Api
         /// </summary>
         public string Token { get; set; }
 
-        /// <summary>
-        /// https://discordapp.com/developers/docs/resources/channel#get-channel
-        /// GET/channels/{channel.id}
-        /// Get a channel by ID. Returns a guild channel or dm channel object.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<Channel> GetCurrentChannelAsync()
-        {
-            return new Channel();
-        }
     }
 }
