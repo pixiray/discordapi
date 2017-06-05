@@ -29,7 +29,7 @@ namespace Pixiray.Discord.Api.Models
         /// Type: Array of Roles
         /// </summary>
         [JsonProperty("roles")]
-        public List<Role> Roles { get; set; }
+        public List<string> Roles { get; set; }
 
         /// <summary>
         /// date the user joined the guild
