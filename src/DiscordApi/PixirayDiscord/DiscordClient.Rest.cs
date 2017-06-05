@@ -86,6 +86,46 @@ namespace Pixiray.Discord.Api
 
         #endregion //End of Region Channel in Discord REST Client
 
+        public async Task<List<Guild>> GetGuilds()
+        {
+            using (var client = new HttpClient())
+            {
+                if (!string.IsNullOrEmpty(Token))
+                {
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Authorization", Token);
+                }
+                else
+                    throw new ArgumentException("Token empty or null");
+
+                try
+                {
+                    var request =
+                        await client.GetAsync(new Uri($"https://discordapp.com/api/users/@me/guilds"));
+                    if (request.IsSuccessStatusCode)
+                    {
+                        try
+                        {
+                            var result = await request.Content.ReadAsStringAsync();
+                            var list = JsonConvert.DeserializeObject<List<Guild>>(result);
+                            return list;
+                        }
+                        catch (Exception e)
+                        {
+                            //Logger
+                            throw new Exception(e.Message);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    //Logger
+                    throw new Exception(e.Message);
+                }
+            }
+            return null;
+        }
+
         /// <summary>
         /// Method Calls the Discord Rest Api to retrieve the Gateway Url
         /// </summary>
