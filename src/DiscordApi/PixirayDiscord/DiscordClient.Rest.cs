@@ -108,6 +108,8 @@ namespace Pixiray.Discord.Api
                         {
                             var result = await request.Content.ReadAsStringAsync();
                             var list = JsonConvert.DeserializeObject<List<Guild>>(result);
+                            //TODO: Make this really async
+                            await GetGuildDetails(list);
                             return list;
                         }
                         catch (Exception e)
@@ -124,6 +126,54 @@ namespace Pixiray.Discord.Api
                 }
             }
             return null;
+        }
+
+        /// <summary>
+        /// Get Guild Details for Guilds
+        /// </summary>
+        /// <param name="list"></param>
+        private async Task GetGuildDetails(List<Guild> list)
+        {
+            //TODO: Make this Parallel
+            for (int i = 0; i < list.Count; i++)
+            {
+                using (var wclient = new HttpClient())
+                {
+                    wclient.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+                    wclient.DefaultRequestHeaders.Add("Authorization", Token);
+                    var req = await wclient.GetAsync($"https://discordapp.com/api/guilds/{list[i].Id}");
+                    var res = await req.Content.ReadAsStringAsync();
+                    list[i] = JsonConvert.DeserializeObject<Guild>(res);
+                }
+            }
+
+            foreach (var g in list)
+            {
+                g.Members = await GetMembers(g);
+                g.Channels = await GetChannels(g);
+            }
+        }
+
+        public async Task<List<Member>> GetMembers(Guild guild)
+        {
+            return await GetMembers(guild.Id);
+        }
+
+        public async Task<List<Member>> GetMembers(string guildId)
+        {
+            //get members
+            //TODO: Error Handling
+            //https://discordapp.com/api/guilds/guildid/members
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("Authorization", Token);
+                var req = await client.GetAsync($"https://discordapp.com/api/guilds/{guildId}/members");
+                var res = await req.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<Member>>(res);
+            }
         }
 
         /// <summary>
