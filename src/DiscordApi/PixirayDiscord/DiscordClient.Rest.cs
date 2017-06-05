@@ -134,7 +134,7 @@ namespace Pixiray.Discord.Api
         /// <param name="list"></param>
         private async Task GetGuildDetails(List<Guild> list)
         {
-            //TODO: Make this Parallel
+            //TODO: Make this Parallel and do some error handling :)
             for (int i = 0; i < list.Count; i++)
             {
                 using (var wclient = new HttpClient())
@@ -160,19 +160,42 @@ namespace Pixiray.Discord.Api
             return await GetMembers(guild.Id);
         }
 
+        /// <summary>
+        /// Get Members of a guild
+        /// </summary>
+        /// <param name="guildId"></param>
+        /// <returns>List of Members</returns>
+        //https://discordapp.com/api/guilds/guildid/members
         public async Task<List<Member>> GetMembers(string guildId)
         {
-            //get members
-            //TODO: Error Handling
-            //https://discordapp.com/api/guilds/guildid/members
-            using (var client = new HttpClient())
+            if (String.IsNullOrEmpty(guildId))
             {
-                client.DefaultRequestHeaders.Accept.Add(
-                    new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("Authorization", Token);
-                var req = await client.GetAsync($"https://discordapp.com/api/guilds/{guildId}/members");
-                var res = await req.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<Member>>(res);
+                try
+                {
+                    using (var client = new HttpClient())
+                    {
+                        client.DefaultRequestHeaders.Accept.Add(
+                            new MediaTypeWithQualityHeaderValue("application/json"));
+                        client.DefaultRequestHeaders.Add("Authorization", Token);
+                        var req = await client.GetAsync($"https://discordapp.com/api/guilds/{guildId}/members");
+                        if (req.IsSuccessStatusCode)
+                        {
+                            var res = await req.Content.ReadAsStringAsync();
+                            return JsonConvert.DeserializeObject<List<Member>>(res);
+                        }
+                        throw new WebException(req.StatusCode.ToString(), new WebException(req.ReasonPhrase));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //Logger;
+                    throw new WebException(ex.Message);
+                }
+            }
+            else
+            {
+                //Logger
+                throw new ArgumentException("guildId is not supposed to be empty you know");
             }
         }
 
